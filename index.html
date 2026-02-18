@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneaker pro - Boutique en ligne Togo</title>
+    <meta name="description" content="Découvrez Sneaker Pro, la référence de chaussures au Togo. Achetez maintenant chez Sneaker proet marchez avec style !">
+    <link rel="icon" href="images/logo.jpeg" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <span>📍 Lomé, Togo | 📞 +228 93 46 90 90</span>
+                    <span>Livraison gratuite à partir de 30 000 FCFA</span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="header-main">
+                <a href="#" class="logo" onclick="showStore()">
+                    <img src="images/logo.jpeg" alt="sneaker pro Logo 1" class="logo-img">
+                    <img src="images/sneaker6.jpeg" alt="sneaker pro Logo 2" class="logo-img">
+                    <img src="images/sneaker7.jpeg" alt="sneaker pro Logo 3" class="logo-img">
+                    <div class="logo-text">
+                        <h1>Sneaker pro</h1>
+                        <h1>La qualité sous sa plus belle forme</h1>
+                        <span>Chaussures Premium</span>
+                        <span>La qualité n'a pas de prix</span>
+                        <span>Trouvez votre style parfait au meilleur prix</span>
+                    </div>
+                </a>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Rechercher une chaussure..." id="searchInput">
+                    <button type="button" class="search-btn" title="Rechercher"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="header-btn" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="header-btn" onclick="showAdminLogin()" title="Accès administrateur">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="container">
+                <ul class="nav-list">
+                    <li class="nav-item active"><a href="#" onclick="filterCategory('all')">Accueil</a></li>
+                    <li class="nav-item"><a href="produits_Hommes.html" onclick="filterCategory('homme')">Homme</a></li>
+                    <li class="nav-item"><a href="#" onclick="filterCategory('sandales')">Sandales</a></li>
+                    <li class="nav-item"><a href="#" onclick="filterCategory('enfant')">Enfant</a></li>
+                    <li class="nav-item"><a href="#" onclick="filterCategory('sport')">Sport</a></li>
+                    <li class="nav-item"><a href="#" onclick="filterCategory('luxe')">Luxe</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Nouvelle Collection 2026</h2>
+                <p>Découvrez les dernières tendances en chaussures. Qualité premium. Livraison rapide partout à Lomé .</p>
+                <a href="#products" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                    Découvrir la collection
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Hero avec Slider -->
+    <section class="hero">
+        <div class="slider">
+            <div class="slides">
+                <img src="images/sneaker1.JPG" alt="Sneaker Homme">
+                <img src="images/sneaker2.JPG" alt="Sandales">
+                <img src="images/sneaker3.jpeg" alt="Basket de luxe">
+                <img src="images/sneaker4.jpeg" alt="Chaussure Sport">
+            </div>
+            <!-- Flèches --> 
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a> 
+            <a class="next" onclick="changeSlide(1)">&#10095;</a> 
+            <!-- Points indicateurs --> 
+            <div class="dots"> 
+                <span onclick="currentSlide(0)"></span> 
+                <span onclick="currentSlide(1)"></span> 
+                <span onclick="currentSlide(2)"></span> 
+                <span onclick="currentSlide(3)"></span> 
+            </div>
+        </div>
+        
+        <div class="hero-text">
+            <h1>Bienvenue chez sneaker pro</h1>
+            <p>Découvrez nos collections Homme, luxe et Sport</p>
+            <button>Voir nos produits</button>
+        </div>
+    </section>
+        <div class="cube">
+            <div class="face front"><img src="images/sneaker6.jpeg" alt=""></div>
+            <div class="face back"><img src="images/sneaker3.jpeg" alt=""></div>
+            <div class="face right"><img src="images/sneaker7.jpeg" alt=""></div>
+            <div class="face left"><img src="images/sneaker4.jpeg" alt=""></div>
+            <div class="face top"><img src="images/sneaker5.jpeg" alt=""></div>
+            <div class="face bottom"><img src="images/sneaker8.jpeg" alt=""></div>
+        </div>
+    <script>
+    // Slider automatique
+        let index = 0;
+        const slides = document.querySelectorAll(".slides img");
+        const dots = document.querySelectorAll(".dots span");
+        function showSlide(n) {
+            slides.forEach((slide, i) => {
+                slide.style.display = (i === n) ? "block" : "none";
+                slide.classList.remove("zoom");
+            });
+            slides[n].classList.add("zoom");
+            dots.forEach((dot, i) => {
+                dot.className = (i === n) ? "active" : "";
+            });
+            index = n;
+        }
+        function changeSlide(n){
+            index = (index + n + slides.length) % slides.length;
+            showSlide(index);
+        }
+        function currentSlide(n){
+            index = n;
+            showSlide(index);
+        }
+        showSlide(index);
+        setInterval(() => showSlide(1), 5000); // change toutes les 5 secondes
+    </script>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Categories -->
+         <section class="image-grid">
+            <div class="image-grid">
+                <div class="image-card">
+                    <img src="images/sneaker1.JPG" alt="Sneaker Homme">
+                    <div class="image-overlay">
+                        <h3>Homme</h3>
+                        <p>Chaussures pour hommes élégantes et confortables</p>
+                    </div>
+                    <button class="img-btn" onclick="filterCategory('homme')">Voir les chaussures</button>
+                </div>
+                <div class="image-card">
+                    <img src="images/sneaker2.JPG" alt="Sandales">
+                    <div class="image-overlay">
+                        <h3>Sandales</h3>
+                        <p>Sandales légères et stylées pour toutes les occasions</p>
+                    </div>
+                    <button class="img-btn" onclick="filterCategory('sandales')">Voir les sandales</button>
+                </div>
+                <div class="image-card">
+                    <img src="images/sneaker5.jpeg" alt="Sneaker Luxe">
+                    <div class="image-overlay">
+                        <h3>Luxe</h3>
+                        <p>Chaussures de luxe pour un style inégalé</p>
+                    </div>
+                    <button class="img-btn" onclick="filterCategory('luxe')">Voir les chaussures de luxe</button>
+                </div>
+                <div class="image-card">
+                    <img src="images/sneaker3.jpeg" alt="Sneaker Sport">
+                    <div class="image-overlay">
+                        <h3>Sport</h3>
+                        <p>Chaussures de sport performantes et tendance</p>
+                    </div>
+                    <button class="img-btn" onclick="filterCategory('sport')">Voir les chaussures de sport</button>
+                </div>
+            </div>
+         </section>
+            
+            <!-- Products -->
+            <div class="section-header">
+                <h2 class="section-title">Nos Chaussures</h2>
+                <p class="section-subtitle">Sélectionnez la meilleure paire pour vous</p>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products injected by JS -->
+            </div>
+        </section>
+    </main>
+    <!-- Cart Sidebar -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">🛒 Mon Panier</h3>
+            <button type="button" class="close-cart" onclick="toggleCart()" title="Fermer le panier"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart-message">Votre panier est vide</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0 FCFA</span>
+            </div>
+            <button class="checkout-btn" id="btnPayment">
+                <i class="fas fa-credit-card"></i>
+                Payer avec Tmoney
+            </button>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <div class="tmoney-logo">💳</div>
+                <h3>Paiement Tmoney</h3>
+                <p>Paiement sécurisé par Togocel</p>
+            </div>
+            <div class="payment-body">
+                <div class="payment-amount" id="paymentAmount">0 FCFA</div>
+                
+                <div class="payment-methods">
+                    <div class="payment-method active" onclick="selectPayment(this, 'tmoney')">
+                        <i class="fas fa-mobile-alt payment-icon-tmoney"></i>
+                        <div>Tmoney</div>
+                    </div>
+                    <div class="payment-method" onclick="selectPayment(this, 'flooz')">
+                        <i class="fas fa-mobile-alt payment-icon-flooz"></i>
+                        <div>Moov Money</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Votre numéro Tmoney/Moov</label>
+                    <input 
+                        type="tel" 
+                        class="form-input" 
+                        placeholder="90 XX XX XX" 
+                        id="phoneNumber"
+                        maxlength="8"
+                        pattern="[0-9]{8}"
+                        inputmode="numeric"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,8)"
+                    >
+                    <small style="color: #6c757d; display: block; margin-top: 5px; font-size: 12px;">
+                        Entrez 8 chiffres sans l'indicatif 228 (ex: 93469090)
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Code PIN Tmoney</label>
+                    <input type="password" class="form-input" placeholder="••••" maxlength="4" id="tmoneyPin">
+                </div>
+
+                <button class="confirm-payment" onclick="processPayment()" id="btnPay">
+                    <i class="fas fa-mobile-alt"></i>
+                     Générer les instructions de paiement
+                </button>
+                
+                <p class="security-notice">
+                    <i class="fas fa-shield-alt"></i> Paiement sécurisé via USSD sur votre téléphone
+                </p>
+                <div id="paymentInstructions" style="display: none; margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid var(--tmoney);">
+                    <!-- Les instructions apparaîtront ici -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <h3>Paiement Réussi!</h3>
+        <p>Votre commande a été confirmée.</p>
+        <p class="success-confirmation-text">
+            Un SMS de confirmation vous a été envoyé.
+        </p>
+        <button class="btn btn-primary mt-4" onclick="closeSuccess()">
+            Continuer mes achats
+        </button>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h2>👟 Sneaker pro Admin</h2>
+                        <p style="opacity: 0.8;">Panneau de contrôle administrateur</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="logoutAdmin()">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </button>
+                </div>
+                <nav class="admin-nav">
+                    <a href="#" class="active" onclick="showAdminTab('dashboard')">Tableau de bord</a>
+                    <a href="#" onclick="showAdminTab('products')">Produits</a>
+                    <a href="#" onclick="showAdminTab('orders')">Commandes</a>
+                    <a href="#" onclick="showAdminTab('settings')">Paramètres</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="container admin-content">
+            <!-- Dashboard Tab -->
+            <div id="admin-dashboard" class="admin-tab">
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <h4>Ventes totales</h4>
+                        <div class="number" id="totalSales">0 FCFA</div>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Commandes</h4>
+                        <div class="number" id="totalOrders">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Produits</h4>
+                        <div class="number" id="totalProducts">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Clients</h4>
+                        <div class="number" id="totalCustomers">0</div>
+                    </div>
+                </div>
+
+                <div class="admin-main">
+                    <h3 style="margin-bottom: 20px;">Commandes récentes</h3>
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>N° Commande</th>
+                                <th>Client</th>
+                                <th>Produits</th>
+                                <th>Total</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentOrdersTable">
+                            <tr>
+                                <td colspan="5" style="text-align: center;">Aucune commande pour le moment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="admin-products" class="admin-tab hidden">
+                <div class="admin-grid">
+                    <div class="admin-sidebar">
+                        <ul class="admin-menu">
+                            <li><a href="#" class="active"><i class="fas fa-list"></i> Tous les produits</a></li>
+                            <li><a href="#" onclick="showAddProduct()"><i class="fas fa-plus"></i> Ajouter un produit</a></li>
+                            <li><a href="#"><i class="fas fa-tags"></i> Catégories</a></li>
+                            <li><a href="#"><i class="fas fa-boxes"></i> Inventaire</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <div class="admin-main" id="productListView">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                                <h3>Liste des produits</h3>
+                                <button class="btn btn-primary" onclick="showAddProduct()">
+                                    <i class="fas fa-plus"></i> Nouveau produit
+                                </button>
+                            </div>
+                            <table class="products-table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Nom</th>
+                                        <th>Catégorie</th>
+                                        <th>Prix</th>
+                                        <th>Stock</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminProductsTable">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="admin-main hidden" id="addProductView">
+                            <h3 style="margin-bottom: 25px;">Ajouter un nouveau produit</h3>
+                            <form class="product-form" onsubmit="saveProduct(event)">
+                                <div class="image-upload" onclick="document.getElementById('productImage').click()">
+                                    <i class="fas fa-camera"></i>
+                                    <p>Cliquez pour ajouter une photo</p>
+                                    <input type="file" id="productImage" hidden accept="image/*">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Nom du produit</label>
+                                    <input type="text" class="form-input" id="productName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-input" id="productDesc" rows="3"></textarea>
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                    <div class="form-group">
+                                        <label class="form-label">Prix (FCFA)</label>
+                                        <input type="number" class="form-input" id="productPrice" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Ancien prix (optionnel)</label>
+                                        <input type="number" class="form-input" id="productOldPrice">
+                                    </div>
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                    <div class="form-group">
+                                        <label class="form-label">Catégorie</label>
+                                        <select class="form-input" id="productCategory">
+                                            <option value="homme">Homme</option>
+                                            <option value="femme">Sandales</option>
+                                            <option value="enfant">Enfant</option>
+                                            <option value="sport">Sport</option>
+                                            <option value="luxe">Luxe</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Stock</label>
+                                        <input type="number" class="form-input" id="productStock" value="10">
+                                    </div>
+                                </div>
+                                
+                                <div style="display: flex; gap: 10px; margin-top: 25px;">
+                                    <button type="button" class="btn btn-secondary" onclick="cancelAddProduct()">Annuler</button>
+                                    <button type="submit" class="btn btn-primary">Enregistrer le produit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="admin-settings" class="admin-tab hidden">
+                <div class="admin-main" style="max-width: 800px;">
+                    <h3 style="margin-bottom: 25px;">Paramètres du site</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nom de la boutique</label>
+                        <input type="text" class="form-input" id="shopName" value="Sneaker pro Chaussures">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-input" id="shopDesc" rows="2">Boutique de chaussures au Togo. Trouvez votre bonheur</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Téléphone</label>
+                        <input type="tel" class="form-input" id="shopPhone" value="+228 93 46 90 90">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">WhatsApp</label>
+                        <input type="tel" class="form-input" id="shopWhatsApp" value="+228 93 46 90 90">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Adresse</label>
+                        <input type="text" class="form-input" id="shopAddress" value="Lomé, Togo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Frais de livraison (FCFA)</label>
+                        <input type="number" class="form-input" id="deliveryFee" value="2000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Seuil livraison gratuite (FCFA)</label>
+                        <input type="number" class="form-input" id="freeDeliveryThreshold" value="30000">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="saveSettings()">
+                        <i class="fas fa-save"></i> Enregistrer les paramètres
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="payment-modal" id="adminLoginModal">
+        <div class="payment-content" style="max-width: 400px;">
+            <div class="payment-header" style="background: var(--dark);">
+                <i class="fas fa-lock" style="font-size: 48px; margin-bottom: 15px;"></i>
+                <h3>Accès Administrateur</h3>
+            </div>
+            <div class="payment-body">
+                <div class="form-group">
+                    <label class="form-label">Identifiant</label>
+                    <input type="text" class="form-input" id="adminUser" placeholder="Entrez votre identifiant" title="Champ d'identifiant" value="snaeakerpro">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="adminPass">Mot de passe</label>
+                    <input type="password" class="form-input" id="adminPass" placeholder="Entrez votre mot de passe" title="Champ de mot de passe" value="sneakerpro228">
+                </div>
+                <button class="confirm-payment" onclick="loginAdmin()">
+                    <i class="fas fa-sign-in-alt"></i> Connexion
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>👟 Sneaker Pro</h3>
+                    <p>Votre boutique de chaussures de confiance au Togo. Nous offrons les meilleures marques.</p>
+                    <div class="payment-methods-footer">
+                        <div class="payment-icon">Tmoney</div>
+                        <div class="payment-icon" style="color: var(--primary);">Flooz</div>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="#">Nouveautés</a></li>
+                        <li><a href="#">Homme</a></li>
+                        <li><a href="#">Sandales</a></li>
+                        <li><a href="#">Enfant</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Service client</h4>
+                    <ul>
+                        <li><a href="#">Contactez-nous</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Lomé, Togo</li>
+                        <li><i class="fas fa-phone"></i> +228 93 46 90 90</li>
+                        <li><i class="fas fa-envelope"></i> contact@sneakerpro.tg</li>
+                        <li><i class="fab fa-whatsapp"></i> +228 93 46 90 90</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sneaker Pro. Tous droits réservés. | Développé avec ❤️ au Togo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Access Button -->
+    <div class="admin-access" onclick="showAdminLogin()" title="Accès Admin">
+        <i class="fas fa-cog"></i>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
